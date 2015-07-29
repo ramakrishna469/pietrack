@@ -1,18 +1,6 @@
 # pietrack
 opensource project management software.
 
-.. image:: https://travis-ci.org/MicroPyramid/pietrack.svg?branch=master
-   :target: https://travis-ci.org/MicroPyramid/pietrack
-
-.. image:: https://readthedocs.org/projects/pietrack/badge/?version=latest
-   :target: https://readthedocs.org/projects/pietrack/?badge=latest
-   :alt: Documentation Status
-
-.. image:: https://coveralls.io/repos/MicroPyramid/pietrack/badge.png?branch=master
-   :target: https://coveralls.io/r/MicroPyramid/pietrack?branch=master
-
-.. image:: https://landscape.io/github/MicroPyramid/pietrack/master/landscape.svg
-   :target: https://landscape.io/github/MicroPyramid/pietrack/master
-   :alt: Code Health
+[![Code Health](https://landscape.io/github/MicroPyramid/pietrack/master/landscape.svg?style=flat)](https://landscape.io/github/MicroPyramid/pietrack/master) [![Documentation Status](https://readthedocs.org/projects/pietrack/badge/?version=latest)](https://readthedocs.org/projects/pietrack/?badge=latest) [![Build Status](https://travis-ci.org/MicroPyramid/pietrack.svg?branch=master)](https://travis-ci.org/MicroPyramid/pietrack) [![Coverage Status](https://coveralls.io/repos/MicroPyramid/pietrack/badge.svg?branch=master&service=github)](https://coveralls.io/github/MicroPyramid/pietrack?branch=master)
 
 head to http://pietrack.readthedocs.org/ for latest documentation
