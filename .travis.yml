@@ -12,7 +12,6 @@ env:
 
 install:
   - pip install -r requirements.txt
-  - pip install mysql-python --use-mirrors
 
 script:
   - python manage.py test
