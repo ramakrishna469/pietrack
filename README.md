@@ -4,3 +4,12 @@ opensource project management software.
 [![Code Health](https://landscape.io/github/MicroPyramid/pietrack/master/landscape.svg?style=flat)](https://landscape.io/github/MicroPyramid/pietrack/master) [![Documentation Status](https://readthedocs.org/projects/pietrack/badge/?version=latest)](https://readthedocs.org/projects/pietrack/?badge=latest) [![Build Status](https://travis-ci.org/MicroPyramid/pietrack.svg?branch=master)](https://travis-ci.org/MicroPyramid/pietrack) [![Coverage Status](https://coveralls.io/repos/MicroPyramid/pietrack/badge.svg?branch=master&service=github)](https://coveralls.io/github/MicroPyramid/pietrack?branch=master)
 
 head to http://pietrack.readthedocs.org/ for latest documentation
+
+Contribute:
+----------
+#. Fork 'pietrack repository'_ on GitHub to start making your changes to the pietrack(Project Management Tool).
+#. Write Python3 compatable code.
+#. Write a tests which shows that the code works as expected or bug fixed.
+#. Send a pull request to auther.
+
+_`pietrack repository`: https://github.com/MicroPyramid/pietrack
