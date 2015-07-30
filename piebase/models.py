@@ -12,9 +12,17 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.generic import GenericForeignKey
 
 
+MILESTONE_STATUS = (
+    ('planned', 'Planned'),
+    ('started', 'Started'),
+    ('finished', 'Finished'),
+)
+
+
 def url(self, filename):
-    url = "%s/%s/%s" % (self.project.slug, rand_str(6), filename)
-    return url
+    if self.__class__ == "Project":
+        return "%s/%s/%s" % (self.slug, rand_str(6), filename)
+    return "%s/%s/%s" % (self.project.slug, rand_str(6), filename)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -69,7 +77,7 @@ class Project(models.Model):
     created_date = models.DateTimeField(verbose_name=_("created date"), auto_now_add=True)
     modified_date = models.DateTimeField(verbose_name=_("modified date"))
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="projects")
-    logo
+    logo = models.ImageField(upload_to=url, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -78,7 +86,7 @@ class Project(models.Model):
 class Attachment(models.Model):
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
     created_date = models.DateTimeField(verbose_name=_("created date"), auto_now_add=True)
-    attached_file = models.FileField(max_length=500, null=True, blank=True, upload_to='', verbose_name=_("attached file"))
+    attached_file = models.FileField(max_length=500, null=True, blank=True, upload_to=url, verbose_name=_("attached file"))
     order = models.IntegerField(default=0, verbose_name=_("order"))
     project = models.ForeignKey(Project)
 
@@ -105,7 +113,7 @@ class Milestone(models.Model):
     estimated_finish = models.DateField(verbose_name=_("estimated finish date"))
     created_date = models.DateTimeField(verbose_name=_("created date"), auto_now_add=True)
     modified_date = models.DateTimeField(verbose_name=_("modified date"))
-    status = models.CharField(planned/started/finished)
+    status = models.CharField(max_length=200, choices=MILESTONE_STATUS, default="planned")
 
     class Meta:
         ordering = ["created_date"]
