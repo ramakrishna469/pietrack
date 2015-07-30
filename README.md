@@ -5,6 +5,13 @@ opensource project management software.
 
 head to http://pietrack.readthedocs.org/ for latest documentation
 
+Features:
+---------
+* Project Wiki
+* Bug Tracking
+* Project backlog
+* Activity log
+
 Contribute:
 ----------
 * Fork [pietrack repository](https://github.com/MicroPyramid/pietrack)
