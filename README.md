@@ -11,4 +11,4 @@ Contribute:
 on GitHub to start making your changes to the pietrack(Project Management Tool).
 * Write Python3 compatable code.
 * Write a tests which shows that the code works as expected or bug fixed.
-* Send a pull request to auther.
+* Send a pull request to author.
