@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     email_verified = models.BooleanField(default=False)
-    company = models.ForeignKey(Organization)
+    organization = models.ForeignKey(Organization)
     pietrack_role = models.CharField(_('pietrack_role'), max_length=30, choices=PIETRACK_ROLES)
 
     USERNAME_FIELD = 'email'
