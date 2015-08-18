@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from accounts.forms import RegisterForm
 from piebase.models import User
 
+
 def register(request):
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
@@ -27,7 +28,6 @@ def register(request):
     return render(request, 'create_account.html')
 
 
-
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -45,6 +45,7 @@ def login(request):
     else:
         return render(request, 'login.html')
         
+
 def forgot_password(request):
     if request.method == 'POST':
         email= str(request.POST.get('email'))
