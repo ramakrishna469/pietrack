@@ -118,6 +118,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     )
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    )
+
 AUTH_USER_MODEL = 'piebase.User'
 
 if 'TRAVIS' in os.environ:
