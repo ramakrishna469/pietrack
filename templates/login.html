@@ -130,65 +130,75 @@
         </div>
         <!--/ tag -->
         <!-- create_div -->
-        <div class="create_div" id='create_account'>
-        <div class="title_flap">Create account</div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input id = 'email_id' type="email" class="form-control"><span id = 'error_email_id'></span>
-        </div>
-        <div class="form-group">
-          <label>Full name</label>
-          <input id = 'full_name_id' type="text" class="form-control"><span id = 'error_full_name_id'></span>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input id = 'password_id' type="passowrd" class="form-control"><span id = 'error_password_id'></span>
-        </div>
-        <div class="form-group">
-          <label>Confirm passowrd</label>
-          <input id = 'confirm_password_id' type="password" class="form-control"><span id = 'error_confirm_password_id'></span>
-        </div>
-        <div class="form-group">
-          <label>user name (case sensitive)</label>
-          <input id = 'username_id' type="text" class="form-control"><span id = 'error_username_id'></span>
-        </div>
-        <div class="form-group">
-          <button id = 'create_account_button_id' class='button'>Sign up for free</button>
-        </div>
-        <!--<div class="form-group">
-          <span class='tag_text'>Are you an exixting member? <a>log in</a></span>
-        </div>-->
-        </div>
+            <div class="create_div" id='create_account'>
+        <form id = 'form_create_account_id' method = 'POST' action = "{% url 'accounts:register' %}">
+            <div class="title_flap">Create account</div>
+            <div class="form-group">
+              <label>Email address</label>
+              <input id = 'email_id' name = 'email' type="email" class="form-control"><span id = 'error_email_id'></span>
+            </div>
+            <div class="form-group">
+              <label>Full name</label>
+              <input id = 'first_name_id' name = 'first_name' type="text" class="form-control"><span id = 'error_first_name_id'></span>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input id = 'password_id' name = 'password' type="password" class="form-control"><span id = 'error_password_id'></span>
+            </div>
+            <div class="form-group">
+              <label>Confirm passowrd</label>
+              <input id = 'confirm_password_id' name = 'confirm_password' type="password" class="form-control"><span id = 'error_confirm_password_id'></span>
+            </div>
+            <div class="form-group">
+              <label>user name (case sensitive)</label>
+              <input id = 'username_id' name = 'username' type="text" class="form-control"><span id = 'error_username_id'></span>
+            </div>
+            <div class="form-group">
+                <button id = 'create_account_button_id' type = 'submit' class='button'>Sign up for free</button>
+            </div>
+            <!--<div class="form-group">
+              <span class='tag_text'>Are you an exixting member? <a>log in</a></span>
+            </div>-->
+            {% csrf_token %}
+        </form>
+            </div>
+
         <!-- create div -->
         <!-- forget login -->
         <div class="forgot_login_div active">
         <div class="bg_blur"></div>
         <!--login -->
-        <div class="login_active actvive_login_forgot" id='login'>
-          <div class="title_flap">login</div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input id = 'login_email_id' type="email" class="form-control">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input id = 'login_password_id' type="passowrd" class="form-control"><span id = 'login_error_id'></span>
-        </div>
-        <div class="form-group">
-          <button id = 'login_button_id' class='button'>LOgin</button>
-        </div>
-        </div>
+            <div class="login_active actvive_login_forgot" id='login'>
+              <div class="title_flap">login</div>
+            <div class="form-group">
+        <form id = 'form_login_id' method = 'POST'>
+              <label>Email address</label>
+              <input id = 'login_email_id' name = 'email' type="email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input id = 'login_password_id' name = 'password' type="password" class="form-control"><span id = 'login_error_id'></span>
+            </div>
+            <div class="form-group">
+              <button id = 'login_button_id' class='button'>LOgin</button>
+            </div>
+            {% csrf_token %}
+        </form>
+            </div>
         <!--/ login -->
         <!-- forgot password -->
-        <div class="forgot_active" id='forgot_password'>
-          <div class="title_flap forgot_flap">forgot password</div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input id = 'fp_email_id' type="email" class="form-control" ><span id = 'error_fp_email_id'></span>
-        </div>
-        <div class="form-group">
-            <button id = 'forgot_password_button_id' class='button'>Reset password</button>
-        </div>
+        <form id = 'form_forgot_password_id' method = 'POST'>
+            <div class="forgot_active" id='forgot_password'>
+              <div class="title_flap forgot_flap">forgot password</div>
+            <div class="form-group">
+              <label>Email address</label>
+              <input id = 'fp_email_id' name = 'email' type="email" class="form-control" ><span id = 'error_fp_email_id'></span>
+            </div>
+            {% csrf_token %}
+        </form>
+            <div class="form-group">
+                <button id = 'forgot_password_button_id' class='button'>Reset password</button>
+            </div>
         <!--/ forgot password -->
         </div>
         <!--/ forget login -->
@@ -229,9 +239,8 @@
     <!--login script-->
     <script>
         $('#login_button_id').click(function(event){
-                var email_address = $('#login_email_id').val()
-                var password = $('#login_password_id').val()
-                $.post("", {'email_address': email_address, 'password': password}, function(result){
+                event.preventDefault();
+                $.post("", $('#form_login_id').serialize(), function(result){
                     if(result.error === true){
                         $('#login_error_id').text(result.error_msg)
                     }
@@ -255,23 +264,16 @@
 
     <script>
         $('#create_account_button_id').click(function(event){
-                var email = $('#email_id').val()
-                var full_name = $('#full_name_id').val().split(' ')
-                var first_name = full_name[0]
-                var last_name = full_name[1]
-                var password = $('#password_id').val()
-                var confirm_password = $('#confirm_password_id').val()
-                var username = $('#username_id').val()
-                $.post("{% url 'accounts:register' %}", {'email': email, 'first_name': first_name, 'last_name': last_name, 'password': password, 'confirm_password': confirm_password, 'username': username}, function(result){
-                    if(result['error']){
-                        $('#error_button_id').text(disp_error(result['error_msg']))
+                event.preventDefault();
+                $.post("{% url 'accounts:register' %}", $('#form_create_account_id').serialize(), function(result){
+                    if(result['form_errors']){
                         $('#error_email_id').text(disp_error(result['form_errors'].email))
                         $('#error_username_id').text(disp_error(result['form_errors'].username))
                         $('#error_password_id').text(disp_error(result['form_errors'].password))
                         $('#error_confirm_password_id').text(disp_error(result['form_errors'].confirm_password))
-                        if(password !== '' && confirm_password !== '' && password !== confirm_password){
-                            $('#error_confirm_password_id').text('password mismatch')
-                        }
+                    }
+                    else if(result['error_password']){
+                            $('#error_confirm_password_id').text(result['error_password'])
                     }
                     else{
                         alert('user_created')
@@ -282,8 +284,8 @@
     
     <script>
         $('#forgot_password_button_id').click(function(event){
-                var email = $('#fp_email_id').val()
-                $.post("{% url 'accounts:forgot_password' %}", {'email': email}, function(result){
+                event.preventDefault();
+                $.post("{% url 'accounts:forgot_password' %}", $('#form_forgot_password_id').serialize(), function(result){
                     if(result['error']){
                         $('#error_fp_email_id').text(disp_error(result['error_msg']))
                         $('#error_fp_email_id').text(disp_error(result['form_errors'].email))

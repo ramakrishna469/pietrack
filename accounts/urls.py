@@ -7,5 +7,4 @@ urlpatterns = [
     url(r'login/', 'accounts.views.login', name = 'login'),
     url(r'register/', 'accounts.views.register', name = 'register'),
     url(r'forgot_password/', 'accounts.views.forgot_password', name = 'forgot_password'),
-    url(r'test_html/', 'accounts.views.test_html', name = 'test_html'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

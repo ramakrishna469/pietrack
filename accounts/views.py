@@ -2,26 +2,24 @@ import json
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib import auth
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.core.mail import send_mail
 from accounts.forms import RegisterForm
 from piebase.models import User
 
-@csrf_exempt
 def register(request):
     if request.method == 'POST':
-        confirm_password = request.POST.get('confirm_password')
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
             email = request.POST.get('email')
             password = request.POST.get('password')
             confirm_password = request.POST.get('confirm_password')
             username = request.POST.get('username')
             if password == confirm_password:
                 json_data = {'error': False}
-                new_user = User.objects.create_user(username = username, email = email, password = password, first_name = first_name, last_name = last_name)
+                new_user = User.objects.create_user(username = username, email = email, password = password, first_name = first_name)
+            else:
+                json_data = {'error': True, 'error_password': 'password mismatch'}
             return HttpResponse(json.dumps(json_data), content_type = 'application/json')
         else:
             json_data = {'error': True, 'form_errors': register_form.errors}
@@ -30,12 +28,11 @@ def register(request):
 
 
 
-@csrf_exempt
 def login(request):
     if request.method == 'POST':
-        email = request.POST.get('email_address')
+        email = request.POST.get('email')
         password = request.POST.get('password')
-        user = auth.authenticate(email = email, password = password)
+        user = auth.authenticate(username = email, password = password)
         if user:
             if user.is_active:
                 auth.login(request, user)
@@ -48,11 +45,9 @@ def login(request):
     else:
         return render(request, 'login.html')
         
-@csrf_exempt
 def forgot_password(request):
     if request.method == 'POST':
         email= str(request.POST.get('email'))
-        print type(email), email
         if not email:
             json_data = {'error': True, 'error_msg': 'This field is required'}
         else:
@@ -63,6 +58,3 @@ def forgot_password(request):
                 json_data = {'error': True, 'error_msg': 'email not registered'}
         return HttpResponse(json.dumps(json_data), content_type = 'application/json')
 
-@csrf_exempt
-def test_html(request):
-    return render(request, 'test.html')
