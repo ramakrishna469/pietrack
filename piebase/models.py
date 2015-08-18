@@ -18,11 +18,22 @@ MILESTONE_STATUS = (
     ('finished', 'Finished'),
 )
 
+PIETRACK_ROLES = (
+    ('PIE_Admin', 'PIE Admin'),
+    ('Org_Admin', 'Organization Admin'),
+    ('PIE_User', 'PIE User'),
+)
+
+
 
 def url(self, filename):
     if self.__class__ == "Project":
         return "%s/%s/%s" % (self.slug, rand_str(6), filename)
     return "%s/%s/%s" % (self.project.slug, rand_str(6), filename)
+
+class Organization(models.Model):
+    name = models.CharField(max_length=250, verbose_name=_("name"))
+    slug = models.SlugField(max_length=250, unique=True, null=False, blank=True, verbose_name=_("slug"))
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -34,6 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'), default=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     email_verified = models.BooleanField(default=False)
+    organization = models.ForeignKey(Organization)
+    pietrack_role = models.CharField(_('pietrack_role'), max_length=30, choices=PIETRACK_ROLES)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

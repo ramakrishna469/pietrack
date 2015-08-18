@@ -1,24 +1,18 @@
 {%extends 'base.html'%}
-{%block base%}
 {%block content%}
-{%endblock content%}
-{{block.super}}
-{%load staticfiles%}
-
-
-    <section id='base_content'>
-      <div class="list_of_projects">
-        <div class="title">
-          <div class="center">
-            <span>Enthusiastically empower front-end web-readiness vis-a-vis frictionless schemas. Globally architect.</span>
-            <div class="left">my projects</div>
-            <div class="right"><button>create Project</button></div>
-          </div>
-        </div>
-        <div class="table_div">
-        <table class='table table-hover'>
+<section id='base_content'>
+  <div class="list_of_projects">
+    <div class="title">
+      <div class="center">
+        <span>Enthusiastically empower front-end web-readiness vis-a-vis frictionless schemas. Globally architect.</span>
+        <div class="left">my projects</div>
+        <div class="right"><button>create Project</button></div>
+      </div>
+    </div>
+    <div class="table_div">
+      <table class='table table-hover'>
         <tbody>
-        {% for project in projects_list %}
+          {% for project in projects_list %}
           <tr>
             <td><img src='http://www.freelargeimages.com/wp-content/uploads/2014/12/Happy_birthday_minions-4.jpg'></td>
             <td>
@@ -30,30 +24,10 @@
               <p>{{user_objects.0.username}}</p>
             </td>
           </tr>
-        {% endfor %}
-
+          {% endfor %}
         </tbody>
-        </table>
-        </div>
-      </div>
-    </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.slimscroll.js' %}"></script>
-    <script type="text/javascript">
-      $(function(){
-        $('.scroll').slimscroll({
-          alwaysVisible: false,
-          height: 400
-        });
-      });
-      $('.sub_list').mouseenter(function(event) {
-        $(this).closest('.parent_list').addClass('active_li_drop')
-      });
-      $('.sub_list').mouseleave(function(event) {
-        $(this).closest('.parent_list').removeClass('active_li_drop')
-      });
-    </script>
-  </body>
-</html>
-{%endblock base%}
+      </table>
+    </div>
+  </div>
+</section>
+{%endblock content%}

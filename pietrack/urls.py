@@ -20,4 +20,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^project/', include('project.urls', namespace='project')),
-]+static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    url(r'^accounts', include('accounts.urls', namespace = 'accounts')),
+]
