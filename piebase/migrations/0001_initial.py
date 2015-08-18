@@ -30,8 +30,8 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True, verbose_name='active')),
                 ('date_joined', models.DateTimeField(auto_now_add=True, verbose_name='date joined')),
                 ('email_verified', models.BooleanField(default=False)),
+                ('pietrack_role', models.CharField(max_length=30, verbose_name='pietrack_role', choices=[(b'PIE_Admin', b'PIE Admin'), (b'Org_Admin', b'Organization Admin'), (b'PIE_User', b'PIE User')])),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
             ],
             options={
                 'abstract': False,
@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('comment', models.TextField(blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('attachments', models.ManyToManyField(to='piebase.Attachment', null=True, blank=True)),
+                ('attachments', models.ManyToManyField(to='piebase.Attachment', blank=True)),
                 ('commented_by', models.ForeignKey(related_name='comments', to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -74,6 +74,14 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['created_date'],
             },
+        ),
+        migrations.CreateModel(
+            name='Organization',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=250, verbose_name='name')),
+                ('slug', models.SlugField(unique=True, max_length=250, verbose_name='slug', blank=True)),
+            ],
         ),
         migrations.CreateModel(
             name='Priority',
@@ -142,11 +150,11 @@ class Migration(migrations.Migration):
                 ('ticket_type', models.CharField(max_length=50)),
                 ('target_date', models.DateField(null=True, blank=True)),
                 ('assigned_to', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
-                ('attachments', models.ManyToManyField(to='piebase.Attachment', null=True, blank=True)),
+                ('attachments', models.ManyToManyField(to='piebase.Attachment', blank=True)),
                 ('milestone', models.ForeignKey(related_name='tasks', default=None, blank=True, to='piebase.Milestone', null=True, verbose_name='milestone')),
                 ('priority', models.ForeignKey(related_name='priority_tickets', verbose_name='priority', blank=True, to='piebase.Priority', null=True)),
                 ('project', models.ForeignKey(related_name='project_tickets', verbose_name='project', to='piebase.Project')),
-                ('reference', models.ManyToManyField(related_name='reference_rel_+', null=True, to='piebase.Ticket', blank=True)),
+                ('reference', models.ManyToManyField(related_name='reference_rel_+', to='piebase.Ticket', blank=True)),
                 ('requirement', models.ForeignKey(related_name='tasks', default=None, blank=True, to='piebase.Requirement', null=True, verbose_name='milestone')),
                 ('severity', models.ForeignKey(related_name='severity_tickets', verbose_name='severity', blank=True, to='piebase.Severity', null=True)),
             ],
@@ -204,6 +212,16 @@ class Migration(migrations.Migration):
             model_name='attachment',
             name='uploaded_by',
             field=models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True),
+        ),
+        migrations.AddField(
+            model_name='user',
+            name='organization',
+            field=models.ForeignKey(to='piebase.Organization'),
+        ),
+        migrations.AddField(
+            model_name='user',
+            name='user_permissions',
+            field=models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions'),
         ),
         migrations.AlterIndexTogether(
             name='timeline',

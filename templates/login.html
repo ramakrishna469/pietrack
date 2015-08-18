@@ -214,19 +214,10 @@
     <script type="text/javascript" src="{% static 'js/hexagon.js' %}"></script>
     <script type="text/javascript">
     $('.login_panel_tab_button').click(function(e){
-
-
-
       var id=$(this).attr('panelId');
       var btn_bg=$(this).css('border-color');
-
-
-
       $('.form_div').children('div').removeClass('active');
       $('.login_panel_tab_button').removeClass('active_button').css('color','inherit');
-
-
-
       
       $(this).addClass('active_button').css('color',btn_bg);
       if(id== 'create_account'){
