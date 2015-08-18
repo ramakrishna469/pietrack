@@ -85,16 +85,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Project(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("name"))
-    slug = models.SlugField(max_length=250, unique=True, null=False, blank=True, verbose_name=_("slug"))
+    slug = models.SlugField(max_length=250, null=False, blank=True, verbose_name=_("slug"))
     description = models.TextField(verbose_name=_("description"))
-    created_date = models.DateTimeField(verbose_name=_("created date"), auto_now_add=True)
+    created_date = models.DateTimeField(verbose_name=_("created date"),auto_now_add=True)
     modified_date = models.DateTimeField(verbose_name=_("modified date"))
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="projects")
     logo = models.ImageField(upload_to=url, blank=True, null=True)
-
+    organization = models.ForeignKey(Organization)
+    
     def __str__(self):
         return self.name
 
+    class Meta:
+        unique_together = [("name", "organization")]
 
 class Attachment(models.Model):
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
@@ -140,7 +143,7 @@ class Requirement(models.Model):
     name = models.CharField(max_length=200, verbose_name=_("name"))
     slug = models.SlugField(max_length=250, null=False, blank=True, verbose_name=_("slug"))
     description = models.TextField(verbose_name=_("description"))
-    project = models.ForeignKey(Project, null=True, blank=False, related_name="roles", verbose_name=_("project"))
+    project = models.ForeignKey(Project, null=True, blank=False, related_name="requirements", verbose_name=_("project"))
     milestone = models.ForeignKey(Milestone, null=True, blank=False, related_name="requirements")
 
     def __str__(self):
@@ -199,7 +202,7 @@ class Ticket(models.Model):
     order = models.IntegerField(default=1)
     description = models.TextField(null=False, blank=True, verbose_name=_("description"))
     attachments = models.ManyToManyField(Attachment, blank=True, null=True)
-    reference = models.ManyToManyField(self, related_name='references', null=True, blank=True)
+    reference = models.ManyToManyField('self', related_name='references', null=True, blank=True)
     status = models.ForeignKey(TicketStatus, null=True, blank=True, related_name="tickets", verbose_name=_("status"))
     severity = models.ForeignKey(Severity, null=True, blank=True, related_name="severity_tickets", verbose_name=_("severity"))
     priority = models.ForeignKey(Priority, null=True, blank=True, related_name="priority_tickets", verbose_name=_("priority"))
@@ -217,8 +220,8 @@ class Comment(models.Model):
     attachments = models.ManyToManyField(Attachment, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        index_together = [('content_type', 'object_id', 'namespace'), ]
+    # class Meta:
+    #     index_together = [('content_type', 'object_id', 'namespace'), ]
 
 
 class Timeline(models.Model):
