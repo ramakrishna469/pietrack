@@ -115,3 +115,14 @@ STATICFILES_DIRS = (
 
 AUTH_USER_MODEL = 'piebase.User'
 
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.mysql',
+            'NAME':     'test',
+            'USER':     'root',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
