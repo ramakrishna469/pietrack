@@ -25,11 +25,11 @@ PIETRACK_ROLES = (
 )
 
 
-
 def url(self, filename):
     if self.__class__ == "Project":
         return "%s/%s/%s" % (self.slug, rand_str(6), filename)
     return "%s/%s/%s" % (self.project.slug, rand_str(6), filename)
+
 
 class Organization(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("name"))
