@@ -1,3 +1,4 @@
+{% load compress %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,8 +8,10 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,500,300,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    {% compress css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/hexagon.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/less" href="{% static 'less/main.less' %}">
+    {% endcompress %}
   </head>
   <body class="container login_container">
     <!--header -->

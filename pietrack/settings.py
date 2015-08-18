@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
     'accounts',
     'dashboard',
     'piebase',
@@ -126,3 +127,22 @@ if 'TRAVIS' in os.environ:
             'PORT':     '',
         }
     }
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ROOT = BASE_DIR + '/static/'
+COMPRESS_ENABLED = True
+COMPRESS_PRECOMPILERS = (
+('text/less', 'lessc {infile} {outfile}'),
+)
+
+COMPRESS_OFFLINE_CONTEXT = {
+'STATIC_URL': 'STATIC_URL',
+}
+
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
