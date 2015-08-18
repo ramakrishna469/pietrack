@@ -58,18 +58,14 @@
               return "";
           }
         $('#id_form_cproject').on('submit',function(e){
-          //alert("working");
           $.post('',$('#id_form_cproject').serialize(),function(response){
-            // alert(response['error'])
             if(response['error']){
-              //alert(send_error(response['errors'].name);
               $("span[name='pname_error']").text(send_error(response['errors'].name));
               $("span[name='pdescription_error']").text(send_error(response['errors'].description));
-              //alert(response['errors'].description);
             }
-            else{/*redirect page here */
-      
-              alert("no errorrs")
+            else{
+              /*redirect page here */
+              alert("Redirect this page (project created)");
             }
           });
           e.preventDefault();

@@ -32,6 +32,7 @@ class Migration(migrations.Migration):
                 ('email_verified', models.BooleanField(default=False)),
                 ('pietrack_role', models.CharField(max_length=30, verbose_name='pietrack_role', choices=[(b'PIE_Admin', b'PIE Admin'), (b'Org_Admin', b'Organization Admin'), (b'PIE_User', b'PIE User')])),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', verbose_name='groups')),
+
             ],
             options={
                 'abstract': False,
@@ -104,7 +105,7 @@ class Migration(migrations.Migration):
                 ('logo', models.ImageField(null=True, upload_to=piebase.models.url, blank=True)),
                 ('members', models.ManyToManyField(related_name='projects', to=settings.AUTH_USER_MODEL)),
                 ('organization', models.ForeignKey(to='piebase.Organization')),
-            ],
+           ],
         ),
         migrations.CreateModel(
             name='Requirement',
@@ -224,6 +225,7 @@ class Migration(migrations.Migration):
             name='user_permissions',
             field=models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions'),
         ),
+
         migrations.AlterIndexTogether(
             name='timeline',
             index_together=set([('content_type', 'object_id', 'namespace')]),

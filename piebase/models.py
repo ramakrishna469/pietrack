@@ -220,8 +220,8 @@ class Comment(models.Model):
     attachments = models.ManyToManyField(Attachment, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    # class Meta:
-    #     index_together = [('content_type', 'object_id', 'namespace'), ]
+    #class Meta:
+    #    index_together = [('content_type', 'object_id', 'namespace'), ]
 
 
 class Timeline(models.Model):
