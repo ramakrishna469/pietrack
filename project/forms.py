@@ -16,4 +16,4 @@ class CreateProjectForm(forms.ModelForm):
 		name = self.cleaned_data['name']
 		if(Project.objects.filter(name=name,organization=self.organization)):
 			raise forms.ValidationError('Project with this name already exists.')
-		return name
+		return name 

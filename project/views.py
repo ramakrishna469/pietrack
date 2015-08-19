@@ -19,4 +19,4 @@ def create_project(request):
 			return HttpResponse(json.dumps({'error':False,'errors':form.errors}), content_type="application/json")
 		else:
 			return HttpResponse(json.dumps({'error':True,'errors':form.errors}), content_type="application/json")
-	return render(request,template_name)
+	return render(request,template_name) 

@@ -223,7 +223,6 @@ class Comment(models.Model):
     #class Meta:
     #    index_together = [('content_type', 'object_id', 'namespace'), ]
 
-
 class Timeline(models.Model):
     content_type = models.ForeignKey(ContentType, related_name="content_type_timelines")
     object_id = models.PositiveIntegerField()
