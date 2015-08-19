@@ -32,7 +32,7 @@ def url(self, filename):
 
 
 class Organization(models.Model):
-    name = models.CharField(max_length=250, verbose_name=_("name"))
+    name = models.CharField(max_length=250, verbose_name=_("name"),unique=True)
     slug = models.SlugField(max_length=250, unique=True, null=False, blank=True, verbose_name=_("slug"))
 
 

@@ -1,8 +1,5 @@
 {%extends 'base.html'%}
-{%block base%}
 {%block content%}
-{%endblock content%}
-{{block.super}}
 {%load staticfiles%}
     <section id='base_content' class='create_project'>
       <div class="content_box">
@@ -30,26 +27,9 @@
           </div>
         </form>
          <!-- create project form end -->
-      </div>
-    </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{%static 'js/jquery.slimscroll.js'%}"></script>
-    <script type="text/javascript">
-      $(function(){
-        $('.scroll').slimscroll({
-          alwaysVisible: false,
-          height: 400
-        });
-      });
-      $('.sub_list').mouseenter(function(event) {
-      	$(this).closest('.parent_list').addClass('active_li_drop')
-      });
-      $('.sub_list').mouseleave(function(event) {
-      	$(this).closest('.parent_list').removeClass('active_li_drop')
-      });
+  {%endblock content%}
 
-
+      {%block create_project_js%}
       /*Backend code start */
         function send_error(error)
           {
@@ -70,11 +50,5 @@
           });
           e.preventDefault();
         });
-
-
       /*Backed code end*/
-
-    </script>
-  </body>
-</html>
-{%endblock base%}
+      {%endblock create_project_js%}
