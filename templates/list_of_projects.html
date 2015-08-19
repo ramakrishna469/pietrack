@@ -6,7 +6,7 @@
       <div class="center">
         <span>Enthusiastically empower front-end web-readiness vis-a-vis frictionless schemas. Globally architect.</span>
         <div class="left">my projects</div>
-        <div class="right"><button>create Project</button></div>
+        <div class="right"><a href="{% url 'project:create_project' %}"><button>create Project</button></div></a>
       </div>
     </div>
     <div class="table_div">
@@ -21,7 +21,7 @@
             </td>
             <td width="15%">
               <p>{{project.created_date}}</p>
-              <p>{{user_objects.0.username}}</p>
+              <p>{{request.user.username}}</p>
             </td>
           </tr>
           {% endfor %}

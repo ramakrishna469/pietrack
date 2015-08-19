@@ -13,7 +13,7 @@ import json
 def create_project(request):
 	template_name = 'create_project.html'
 	if(request.method=="POST"):		
-		organization=request.user.organization
+		organization=Organization.objects.all()[0] #request.user.organization
 		form = CreateProjectForm(request.POST,organization=organization)
 		if(form.is_valid()):
 			slug = slugify(request.POST['name'])
@@ -27,7 +27,6 @@ def create_project(request):
 @login_required
 def list_of_projects(request):
 	template_name = 'list_of_projects.html'
-	projects_list=Project.objects.all()
-	user_objects=User.objects.all()
-	dict_items={'projects_list':projects_list, 'user_objects':user_objects}
+	projects_list=Project.objects.filter(members__email=request.user)
+	dict_items={'projects_list':projects_list, 'user':request.user}
 	return render(request, template_name, dict_items)
