@@ -32,7 +32,7 @@ def url(self, filename):
 
 
 class Organization(models.Model):
-    name = models.CharField(max_length=250, verbose_name=_("name"))
+    name = models.CharField(max_length=250, verbose_name=_("name"),unique=True)
     slug = models.SlugField(max_length=250, unique=True, null=False, blank=True, verbose_name=_("slug"))
 
 
@@ -85,16 +85,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Project(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("name"))
-    slug = models.SlugField(max_length=250, unique=True, null=False, blank=True, verbose_name=_("slug"))
+    slug = models.SlugField(max_length=250, null=False, blank=True, verbose_name=_("slug"))
     description = models.TextField(verbose_name=_("description"))
-    created_date = models.DateTimeField(verbose_name=_("created date"), auto_now_add=True)
+    created_date = models.DateTimeField(verbose_name=_("created date"),auto_now_add=True)
     modified_date = models.DateTimeField(verbose_name=_("modified date"))
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="projects")
     logo = models.ImageField(upload_to=url, blank=True, null=True)
-
+    organization = models.ForeignKey(Organization)
+    
     def __str__(self):
         return self.name
 
+    class Meta:
+        unique_together = [("name", "organization")]
 
 class Attachment(models.Model):
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
@@ -219,7 +222,6 @@ class Comment(models.Model):
 
     #class Meta:
     #    index_together = [('content_type', 'object_id', 'namespace'), ]
-
 
 class Timeline(models.Model):
     content_type = models.ForeignKey(ContentType, related_name="content_type_timelines")

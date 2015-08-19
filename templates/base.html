@@ -230,6 +230,10 @@
       $('.sub_list,.sub_list_extras').mouseleave(function(event) {
       	$(this).closest('.parent_list').removeClass('active_li_drop')
       });
+
+      {%block create_project_js%}
+      {%endblock create_project_js%}
+
     </script>
   </body>
 </html>
