@@ -201,8 +201,8 @@ class Ticket(models.Model):
     finished_date = models.DateTimeField(null=True, blank=True, verbose_name=_("finished date"))
     order = models.IntegerField(default=1)
     description = models.TextField(null=False, blank=True, verbose_name=_("description"))
-    attachments = models.ManyToManyField(Attachment, blank=True, null=True)
-    reference = models.ManyToManyField('self', related_name='references', null=True, blank=True)
+    attachments = models.ManyToManyField(Attachment, blank=True)
+    reference = models.ManyToManyField('self', related_name='references', blank=True)
     status = models.ForeignKey(TicketStatus, null=True, blank=True, related_name="tickets", verbose_name=_("status"))
     severity = models.ForeignKey(Severity, null=True, blank=True, related_name="severity_tickets", verbose_name=_("severity"))
     priority = models.ForeignKey(Priority, null=True, blank=True, related_name="priority_tickets", verbose_name=_("priority"))
@@ -217,7 +217,7 @@ class Comment(models.Model):
     comment = models.TextField(blank=True)
     commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="comments")
     ticket = models.ForeignKey(Ticket, related_name="ticket_comments")
-    attachments = models.ManyToManyField(Attachment, blank=True, null=True)
+    attachments = models.ManyToManyField(Attachment, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     #class Meta:
