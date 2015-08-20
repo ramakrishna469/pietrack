@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-
+{% load staticfiles %}
 {%block headerline%}
 <li>
          <span class='each_wrap child_one'>
@@ -56,7 +56,7 @@
                </div>
             </div>
             <div class="col-md-3 logo">
-               <img src="img/user-pic.jpg" alt="user-profile-pic" />
+               <img src="{% static 'img/user-pic.jpg' %}" alt="user-profile-pic" />
             </div>
             <div class="clearfix"></div>
          </div>
