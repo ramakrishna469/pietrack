@@ -13,7 +13,7 @@
       <table class='table table-hover'>
         <tbody>
           {% for project in projects_list %}
-          <tr>
+          <tr data-href="{% url 'project:project_description' project.id %}">
             <td><img src='http://www.freelargeimages.com/wp-content/uploads/2014/12/Happy_birthday_minions-4.jpg'></td>
             <td>
               <h2>{{project.name}}</h2>
@@ -31,3 +31,11 @@
   </div>
 </section>
 {%endblock content%}
+
+{%block create_project_js%}
+
+$('tr[data-href]').on("click", function() {
+    document.location = $(this).data('href');
+});
+
+{%endblock create_project_js%}
